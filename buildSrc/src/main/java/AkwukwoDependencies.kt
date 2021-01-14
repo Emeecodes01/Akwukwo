@@ -30,16 +30,24 @@ object Config {
 object TestDependencies {
 
     object Versions {
+        const val mockk = "1.9.3"
+        const val konveyor = "1.0.3"
+        const val coroutineTest = "1.4.2"
         const val junitVersion = "4.13.1"
         const val androidJunit = "1.1.2"
         const val espressoCore = "3.3.0"
         const val annotation = "1.1.0"
+        const val truth = "1.0.1"
     }
 
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val konveyor = "com.github.vacxe:konveyor:${Versions.konveyor}"
     const val junit = "junit:junit:${Versions.junitVersion}"
     const val androidJunit = "androidx.test.ext:junit:${Versions.androidJunit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
     const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
+    const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutineTest}"
+    const val truth = "com.google.truth:truth:${Versions.truth}"
 }
 
 
@@ -174,5 +182,9 @@ fun DependencyHandler.dagger() {
 }
 
 fun DependencyHandler.unitTestDeps() {
+    add("testImplementation", TestDependencies.konveyor)
+    add("testImplementation", TestDependencies.mockk)
     add("testImplementation", TestDependencies.junit)
+    add("testImplementation", TestDependencies.coroutineTest)
+    add("testImplementation", TestDependencies.truth)
 }
