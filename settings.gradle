@@ -1,4 +1,0 @@
-include ':core'
-include ':domain'
-include ':mobile-ui'
-rootProject.name = "Akwukwo"
