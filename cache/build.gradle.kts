@@ -3,7 +3,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
+
 
 android {
     compileSdkVersion(Config.Versions.compileSdkVer)
@@ -16,7 +18,7 @@ android {
         versionName = Config.Versions.versionName
 
         testInstrumentationRunner = Config.Android.testRunner
-        consumerProguardFiles ("consumer-rules.pro")
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -32,11 +34,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+
     tasks.withType <KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
-    core()
+    cache()
 }

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -16,7 +17,7 @@ android {
         versionName = Config.Versions.versionName
 
         testInstrumentationRunner = Config.Android.testRunner
-        consumerProguardFiles ("consumer-rules.pro")
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -24,6 +25,13 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-logic.pro")
         }
+
+        named("debug") {
+            isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://jackiechanbruteforce.ulesson.com/\"")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-logic.pro")
+        }
+
     }
 
 
@@ -32,11 +40,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+
     tasks.withType <KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    core()
+    remote()
 }

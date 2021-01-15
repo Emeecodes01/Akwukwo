@@ -9,6 +9,7 @@ buildscript {
         classpath(Config.ClassPaths.androidGradlePlugin)
         classpath(Config.ClassPaths.kotlinGradlePlugin)
         classpath(Config.ClassPaths.safeArgs)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

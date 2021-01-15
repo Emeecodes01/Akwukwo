@@ -4,16 +4,27 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.2")
+    compileSdkVersion(Config.Versions.compileSdkVer)
+    buildToolsVersion(Config.Versions.buildToolsVer)
 
     defaultConfig {
-        applicationId = "com.mobigods.akwkw"
-        minSdkVersion (21)
-        targetSdkVersion (30)
-        versionCode = 1
-        versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        applicationId = Config.Android.applicationId
+        minSdkVersion(Config.Versions.minSdk)
+        targetSdkVersion(Config.Versions.targetSdk)
+        versionCode = Config.Versions.versionCode
+        versionName = Config.Versions.versionName
+
+        testInstrumentationRunner = Config.Android.testRunner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments(
+                    mapOf (
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true")
+                )
+            }
+        }
     }
 
     buildTypes {

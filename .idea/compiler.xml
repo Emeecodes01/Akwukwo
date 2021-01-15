@@ -3,8 +3,10 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="Akwukwo.buildSrc" target="1.8" />
+      <module name="Akwukwo.cache" target="1.8" />
       <module name="Akwukwo.core" target="1.8" />
       <module name="Akwukwo.mobile-ui" target="1.8" />
+      <module name="Akwukwo.remote" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,20 +1,21 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 
 const val kotlinVersion = "1.4.21"
 const val gradle = "4.1.1"
 
 object Config {
     object Versions {
-        const val compileSdkVer = 29
-        const val buildToolsVer = "30.0.0"
+        const val compileSdkVer = 30
+        const val buildToolsVer = "30.0.2"
         const val minSdk = 21
-        const val targetSdk = 29
+        const val targetSdk = 30
         const val versionCode = 1
         const val versionName = "v1.0.0"
     }
 
     object Android {
-        const val applicationId = "ng.softcom.databeaver"
+        const val applicationId = "com.mobigods.akwkw"
         const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -166,12 +167,38 @@ object AkwukwoDependencies {
  */
 fun DependencyHandler.domain() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
-    add("implementation", AkwukwoDependencies.Async.ktCoroutines)
-    add("implementation", AkwukwoDependencies.Async.ktCoroutinesAndroid)
+    coroutines()
     dagger()
     unitTestDeps()
 }
 
+fun DependencyHandler.core() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("api", AkwukwoDependencies.UILibs.materialDesign)
+    androidX()
+    androidUITestDeps()
+    unitTestDeps()
+
+}
+
+fun DependencyHandler.remote() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("implementation", project(":domain"))
+    add("implementation", project(":core"))
+    network()
+    coroutines()
+    dagger()
+    unitTestDeps()
+}
+
+
+fun DependencyHandler.cache() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("implementation", project(":domain"))
+    add("implementation", project(":core"))
+    room()
+    dagger()
+}
 
 /**
  * Library dependencies block
@@ -179,6 +206,61 @@ fun DependencyHandler.domain() {
 fun DependencyHandler.dagger() {
     add("implementation", AkwukwoDependencies.DependencyInjection.dagger)
     add("kapt", AkwukwoDependencies.DependencyInjection.daggerCompiler)
+}
+
+
+fun DependencyHandler.coroutines() {
+    add("implementation", AkwukwoDependencies.Async.ktCoroutines)
+    add("implementation", AkwukwoDependencies.Async.ktCoroutinesAndroid)
+}
+
+fun DependencyHandler.network() {
+    add("api", AkwukwoDependencies.Api.retrofit)
+    add("api", AkwukwoDependencies.Api.okhttpInterceptor)
+    add("api", AkwukwoDependencies.Api.gson)
+    add("api", AkwukwoDependencies.Api.gsonConverter)
+
+}
+
+fun DependencyHandler.navigationComponent() {
+    add("api", AkwukwoDependencies.Navigation.navFragment)
+    add("api", AkwukwoDependencies.Navigation.navUI)
+    add("api", AkwukwoDependencies.Navigation.navFeatureModule)
+}
+
+fun DependencyHandler.daggerAndroid() {
+    add("implementation", AkwukwoDependencies.DependencyInjection.dagger)
+    add("implementation", AkwukwoDependencies.DependencyInjection.daggerAndroid)
+    add("implementation", AkwukwoDependencies.DependencyInjection.daggerSupportLibs)
+    add("kapt", AkwukwoDependencies.DependencyInjection.daggerCompiler)
+    add("kapt", AkwukwoDependencies.DependencyInjection.daggerAndroidProcessor)
+}
+
+
+fun DependencyHandler.androidX(){
+    add("implementation", AkwukwoDependencies.AndroidX.appCompact)
+    add("implementation", AkwukwoDependencies.AndroidX.core)
+    add("implementation", AkwukwoDependencies.AndroidX.activityExtLib)
+}
+
+
+fun DependencyHandler.androidUITestDeps() {
+    add("androidTestImplementation", TestDependencies.androidJunit)
+    add("androidTestImplementation", TestDependencies.espresso)
+    add("androidTestImplementation", TestDependencies.annotation)
+}
+
+fun DependencyHandler.archComponent() {
+    add("implementation", AkwukwoDependencies.Architecture.viewModel)
+    add("implementation", AkwukwoDependencies.Architecture.viewModelKtx)
+}
+
+
+fun DependencyHandler.room() {
+    add("api", AkwukwoDependencies.Persistence.room)
+    add("api", AkwukwoDependencies.Persistence.roomExt)
+    add("implementation", AkwukwoDependencies.Api.gson)
+    add("kapt", AkwukwoDependencies.Persistence.roomCompiler)
 }
 
 fun DependencyHandler.unitTestDeps() {
