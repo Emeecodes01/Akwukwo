@@ -1,21 +1,24 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    id ("com.android.application")
+    id ("com.android.library")
     kotlin("android")
     kotlin("kapt")
 }
+
 
 android {
     compileSdkVersion(Config.Versions.compileSdkVer)
     buildToolsVersion(Config.Versions.buildToolsVer)
 
     defaultConfig {
-        applicationId = Config.Android.applicationId
         minSdkVersion(Config.Versions.minSdk)
         targetSdkVersion(Config.Versions.targetSdk)
         versionCode = Config.Versions.versionCode
         versionName = Config.Versions.versionName
 
         testInstrumentationRunner = Config.Android.testRunner
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -25,16 +28,18 @@ android {
         }
     }
 
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    tasks.withType <org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+
+    tasks.withType <KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    mobileUI()
+    presentation()
 }

@@ -1,2 +1,2 @@
-include (":mobile-ui", ":core", ":domain", ":remote", ":cache")
+include (":mobile-ui", ":core", ":domain", ":remote", ":cache", ":presentation")
 rootProject.name = "Akwukwo"

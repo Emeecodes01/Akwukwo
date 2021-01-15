@@ -175,15 +175,17 @@ fun DependencyHandler.domain() {
 fun DependencyHandler.core() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("api", AkwukwoDependencies.UILibs.materialDesign)
+    add("api", project(":domain"))
     androidX()
+    dagger()
     androidUITestDeps()
     unitTestDeps()
-
+    navigationComponent()
 }
 
 fun DependencyHandler.remote() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
-    add("implementation", project(":domain"))
+    //add("implementation", project(":domain"))
     add("implementation", project(":core"))
     network()
     coroutines()
@@ -194,10 +196,36 @@ fun DependencyHandler.remote() {
 
 fun DependencyHandler.cache() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
-    add("implementation", project(":domain"))
+    //add("implementation", project(":domain"))
     add("implementation", project(":core"))
     room()
     dagger()
+}
+
+fun DependencyHandler.presentation() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("implementation", project(":core"))
+    //add("implementation", project(":domain"))
+    archComponent()
+    dagger()
+    unitTestDeps()
+}
+
+
+fun DependencyHandler.mobileUI() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("implementation", AkwukwoDependencies.UILibs.materialDesign)
+    add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
+    add("implementation", project(":core"))
+    add("implementation", project(":presentation"))
+    add("implementation", project(":remote"))
+    add("implementation", project(":cache"))
+    archComponent()
+    dagger()
+    unitTestDeps()
+    androidUITestDeps()
+    daggerAndroid()
+    androidX()
 }
 
 /**
@@ -251,8 +279,8 @@ fun DependencyHandler.androidUITestDeps() {
 }
 
 fun DependencyHandler.archComponent() {
-    add("implementation", AkwukwoDependencies.Architecture.viewModel)
-    add("implementation", AkwukwoDependencies.Architecture.viewModelKtx)
+    add("api", AkwukwoDependencies.Architecture.viewModel)
+    add("api", AkwukwoDependencies.Architecture.viewModelKtx)
 }
 
 
