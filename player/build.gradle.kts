@@ -1,16 +1,14 @@
 plugins {
-    id ("com.android.application")
+    id("com.android.dynamic-feature")
     kotlin("android")
     kotlin("kapt")
 }
+
 
 android {
     compileSdkVersion(Config.Versions.compileSdkVer)
     buildToolsVersion(Config.Versions.buildToolsVer)
 
-    buildFeatures {
-        dataBinding = true
-    }
 
     defaultConfig {
         applicationId = Config.Android.applicationId
@@ -22,6 +20,7 @@ android {
         testInstrumentationRunner = Config.Android.testRunner
     }
 
+
     buildTypes {
         named("release") {
             isMinifyEnabled = false
@@ -29,18 +28,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    dynamicFeatures = mutableSetOf(":player")
-
-    tasks.withType <org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
 }
 
+
 dependencies {
-    mobileUI()
+    implementation(project(":mobile-ui"))
+    player()
 }

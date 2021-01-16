@@ -147,6 +147,7 @@ object AkwukwoDependencies {
         const val playCoreKtx = "com.google.android.play:core-ktx:${Version.playCoreKtx}"
     }
 
+
     object Api {
         object Version {
             const val retrofit = "2.9.0"
@@ -160,7 +161,9 @@ object AkwukwoDependencies {
         const val gson = "com.google.code.gson:gson:${Version.gson}"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.gsonConverter}"
     }
+
 }
+
 
 /**
  * Module dependencies block
@@ -228,11 +231,21 @@ fun DependencyHandler.mobileUI() {
     androidX()
 }
 
+
+fun DependencyHandler.player() {
+    add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
+    add("implementation", AkwukwoDependencies.UILibs.materialDesign)
+    add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
+    unitTestDeps()
+    androidUITestDeps()
+    androidX()
+}
+
 /**
  * Library dependencies block
  */
 fun DependencyHandler.dagger() {
-    add("implementation", AkwukwoDependencies.DependencyInjection.dagger)
+    add("api", AkwukwoDependencies.DependencyInjection.dagger)
     add("kapt", AkwukwoDependencies.DependencyInjection.daggerCompiler)
 }
 

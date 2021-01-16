@@ -6,6 +6,7 @@
       <module name="Akwukwo.cache" target="1.8" />
       <module name="Akwukwo.core" target="1.8" />
       <module name="Akwukwo.mobile-ui" target="1.8" />
+      <module name="Akwukwo.player" target="1.8" />
       <module name="Akwukwo.presentation" target="1.8" />
       <module name="Akwukwo.remote" target="1.8" />
     </bytecodeTargetLevel>
