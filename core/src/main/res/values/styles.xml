@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Akwukwo.TextHeadline4" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline4</item>
+    </style>
+
+    <style name="Widget.Akwukwo.TextHeadline5" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline5</item>
+    </style>
+
+
+    <style name="Widget.Akwukwo.SubjectTitle" parent="">
+        <item name="fontFamily">@font/mulish_regular</item>
+        <item name="android:textAppearance">?attr/textAppearanceCaption</item>
+        <item name="android:textColor">@color/silver_tree</item>
+    </style>
+
+    <style name="Widget.Akwukwo.Chapter" parent="">
+        <item name="fontFamily">@font/mulish_regular</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+    <style name="Widget.Akwukwo.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="navigationIcon">@drawable/ic_back</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Akwukwo.ToolbarTitle</item>
+    </style>
+
+
+</resources>
