@@ -1,4 +1,4 @@
-package com.mobigods.core.utils
+package com.mobigods.core.utils.thread
 
 import com.mobigods.domain.thread.ExecutionThread
 import kotlinx.coroutines.CoroutineDispatcher

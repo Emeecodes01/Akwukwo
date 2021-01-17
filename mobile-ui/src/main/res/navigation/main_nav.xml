@@ -36,11 +36,14 @@
     <fragment
         android:id="@+id/playerFragment"
         android:name="com.mobigods.player.ui.PlayerFragment"
-        app:moduleName="Akwukwo.player"
+        app:moduleName="player"
         android:label="PlayerFragment"
         tools:layout="@layout/fragment_player">
         <argument
-            android:name="media_url"
+            android:name="lesson"
+            app:argType="com.mobigods.presentation.models.LessonModel" />
+        <argument
+            android:name="chapterName"
             app:argType="string" />
     </fragment>
 
