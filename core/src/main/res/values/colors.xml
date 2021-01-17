@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="black_800">#121212</color>
+    <color name="black_900">#000000</color>
+
+    <color name="akwukwo_white">#FFFFFF</color>
+    <color name="akwukwo_gray">#B6B6B6</color>
+    <color name="iron">#EAEAEB</color>
+    <color name="grey">#E5E5E5</color>
+
+
+    <color name="burnt_sienna">#EA7052</color>
+    <color name="waikawa_gray">#556AA7</color>
+    <color name="rajah">#F9AD6D</color>
+    <color name="silver_tree">#68BC98</color>
+    <color name="chetwode_bluw">#7B7FDA</color>
+
+</resources>

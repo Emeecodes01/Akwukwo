@@ -1,4 +1,4 @@
-package com.mobigods.core.utils
+package com.mobigods.core.utils.extensions
 
 import android.content.SharedPreferences
 

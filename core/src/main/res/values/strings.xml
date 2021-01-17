@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello_simbi">Hello Simbi</string>
+    <string name="recently_watched_topics">Recently watched topics</string>
+    <string name="view_all">View all</string>
+</resources>

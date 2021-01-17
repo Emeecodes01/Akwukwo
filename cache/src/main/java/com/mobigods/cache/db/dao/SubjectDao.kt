@@ -5,14 +5,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mobigods.cache.models.SubjectCacheModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class SubjectDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun saveSubjects(subjects: List<SubjectCacheModel>): List<Long>
 
     @Query("SELECT * FROM subjects")
-    abstract fun getAllSubjects(): List<SubjectCacheModel>
+    abstract fun getAllSubjects(): Flow<List<SubjectCacheModel>>
 
 }

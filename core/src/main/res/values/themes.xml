@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Akwukwo" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black_900</item>
+        <item name="colorOnBackground">@color/black_900</item>
+        <item name="colorOnSurface">@color/black_900</item>
+        <item name="colorOnError">@color/white</item>
+
+
+        <!-- Material Text styles-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Akwukwo.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Akwukwo.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Akwukwo.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Akwukwo.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Akwukwo.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Akwukwo.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Akwukwo.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Akwukwo.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Akwukwo.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Akwukwo.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Akwukwo.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Akwukwo.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Akwukwo.Overline</item>
+
+
+        <!-- Material Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Akwukwo.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Akwukwo.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Akwukwo.LargeComponent</item>
+
+
+        <!--Platform attributes-->
+        <item name="android:navigationBarColor">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+
+
+    </style>
+
+    <!--Extend this whenever you want to create a new theme to use-->
+    <style name="Akwukwo" parent="Base.Akwukwo"/>
+
+    <style name="Akwukwo.Main" parent="Akwukwo">
+        <!--Main App colors-->
+        <item name="colorPrimary">@color/akwukwo_white</item>
+        <item name="colorPrimaryVariant">@color/akwukwo_gray</item>
+        <item name="colorSecondary">@color/akwukwo_white</item>
+        <item name="colorSecondaryVariant">@color/akwukwo_white</item>
+
+    </style>
+
+
+    <style name="Akwukwo.Main.TranslucentStatus">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+</resources>

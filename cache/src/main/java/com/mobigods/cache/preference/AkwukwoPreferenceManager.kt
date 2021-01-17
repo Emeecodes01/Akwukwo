@@ -3,7 +3,7 @@ package com.mobigods.cache.preference
 import android.content.Context
 import android.content.SharedPreferences
 import com.mobigods.cache.utils.CacheConstants
-import com.mobigods.core.utils.edit
+import com.mobigods.core.utils.extensions.edit
 import javax.inject.Inject
 
 class AkwukwoPreferenceManager @Inject constructor(private val context: Context): IPreferenceManager {

@@ -10,20 +10,20 @@ class ChapterRemoteModelMapper @Inject constructor (
 ): BaseMapper<ChapterRemoteModel, Chapter> {
 
     override fun mapTo(to: Chapter): ChapterRemoteModel {
-        return ChapterRemoteModel(
-            id = to.id,
-            name = to.name,
-            lessons = to.lessons.map { lessonMapper.mapTo(it) }
-        )
+//        return ChapterRemoteModel(
+//            id = to.id,
+//            name = to.name,
+//            lessons = to.lessons.map { lessonMapper.mapTo(it) }
+//        )
+        throw Exception("Not Implement")
     }
 
     override fun mapFrom(from: ChapterRemoteModel): Chapter {
-//        return Chapter(
-//            id = from.id,
-//            name = from.name,
-//            lessons = from.lessons.map { lessonMapper.mapFrom(it) }
-//        )
-        throw Exception("Not Implement")
+        return Chapter(
+            id = from.id,
+            name = from.name,
+            lessons = from.lessons.map { lessonMapper.mapFrom(it) }
+        )
     }
 
 

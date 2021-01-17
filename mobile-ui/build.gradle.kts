@@ -1,12 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id ("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("androidx.navigation.safeargs")
 }
 
 android {
     compileSdkVersion(Config.Versions.compileSdkVer)
     buildToolsVersion(Config.Versions.buildToolsVer)
+
+    buildFeatures {
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId = Config.Android.applicationId
@@ -30,7 +37,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    tasks.withType <org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    dynamicFeatures = mutableSetOf(":player")
+
+    tasks.withType <KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
