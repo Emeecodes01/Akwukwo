@@ -75,10 +75,12 @@ object AkwukwoDependencies {
             const val materialDesignComps = "1.2.1"
             const val constraintLayout = "2.0.4"
             const val rvAnimator = "4.0.1"
+            const val loadingDialog = "1.2.1"
         }
         const val materialDesign = "com.google.android.material:material:${Versions.materialDesignComps}"
         const val constraintLayoutDep = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         const val recyclerViewAnimator = "jp.wasabeef:recyclerview-animators:${Versions.rvAnimator}"
+        const val loadingDep = "cc.cloudist.acplibrary:library:${Versions.loadingDialog}"
     }
 
     object Persistence {
@@ -166,6 +168,13 @@ object AkwukwoDependencies {
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.gsonConverter}"
     }
 
+    object Image {
+        object Version {
+            const val glide = "4.11.0"
+        }
+        const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
+    }
+
 }
 
 
@@ -182,8 +191,9 @@ fun DependencyHandler.domain() {
 fun DependencyHandler.core() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("api", AkwukwoDependencies.UILibs.materialDesign)
-    add("implementation", "cc.cloudist.acplibrary:library:1.2.1")
+    add("implementation", AkwukwoDependencies.UILibs.loadingDep)
     add("api", project(":domain"))
+    glide()
     androidX()
     dagger()
     androidUITestDeps()
@@ -225,10 +235,10 @@ fun DependencyHandler.mobileUI() {
     add("implementation", AkwukwoDependencies.UILibs.materialDesign)
     add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
     add("implementation", AkwukwoDependencies.UILibs.recyclerViewAnimator)
-    add("implementation", project(":core"))
-    add("implementation", project(":presentation"))
+    add("api", project(":core"))
+    add("api", project(":presentation"))
     add("implementation", project(":remote"))
-    add("implementation", project(":cache"))
+    add("api", project(":cache"))
     archComponent()
     dagger()
     unitTestDeps()
@@ -242,11 +252,11 @@ fun DependencyHandler.player() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("implementation", AkwukwoDependencies.UILibs.materialDesign)
     add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
-    add("implementation", project(":core"))
     exoplayer()
     unitTestDeps()
     androidUITestDeps()
     androidX()
+    dagger()
 }
 
 /**
@@ -324,4 +334,8 @@ fun DependencyHandler.exoplayer() {
     add("implementation", AkwukwoDependencies.ExoPlayer.exoCore)
     add("implementation", AkwukwoDependencies.ExoPlayer.exoUI)
     add("implementation", AkwukwoDependencies.ExoPlayer.exoStreaming)
+}
+
+fun DependencyHandler.glide() {
+    add("api", AkwukwoDependencies.Image.glide)
 }

@@ -17,6 +17,7 @@ import com.mobigods.presentation.viewmodels.AkwukwoViewModelFactory
 import com.mobigods.presentation.viewmodels.dashboard.DashBoardViewModel
 import dagger.android.support.AndroidSupportInjection
 import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -44,15 +45,14 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
 
     private fun setUpUI() {
         binding.subjectsRv.apply {
-            setHasFixedSize(true)
+            itemAnimator = SlideInDownAnimator().apply {
+                addDuration = 300
+                removeDuration = 300
+                moveDuration = 300
+                changeDuration = 300
+            }
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(SubjectsItemDecoration(resources.getDimension(R.dimen.rv_item_spacing).toInt()))
-            itemAnimator = LandingAnimator().apply {
-                addDuration = 500
-                removeDuration = 500
-                moveDuration = 500
-                changeDuration = 500
-            }
             adapter = subjectAdapter
         }
     }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mobigods.akwkw.databinding.LayoutSubjectItemBinding
 import com.mobigods.akwkw.ui.subject.diffs.SubjectDiff
+import com.mobigods.core.utils.extensions.checkAndUpdateItems
 import com.mobigods.core.utils.extensions.click
 import com.mobigods.presentation.models.SubjectModel
 import kotlin.properties.Delegates
@@ -15,10 +16,9 @@ class SubjectAdapter(private val onClick: (SubjectModel) -> Unit): RecyclerView.
     private lateinit var binding: LayoutSubjectItemBinding
 
     var subjects: List<SubjectModel> by Delegates.observable(emptyList()) { _, oldList, newList ->
-//        val diffUtilCallbackImpl = SubjectDiff(oldList, newList)
-//        val diff = DiffUtil.calculateDiff(diffUtilCallbackImpl)
-//        diff.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
+        checkAndUpdateItems(oldList, newList) { old, new ->
+            old.id == new.id
+        }
     }
 
 

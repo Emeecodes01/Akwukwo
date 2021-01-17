@@ -2,6 +2,7 @@ package com.mobigods.akwkw
 
 import android.app.Application
 import com.mobigods.akwkw.di.component.DaggerAppComponent
+import com.mobigods.core.di.component.CoreComponent
 import com.mobigods.core.di.component.DaggerCoreComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -28,5 +29,4 @@ class AkwukwoApp: DaggerApplication() {
         super.onCreate()
         appComponent.inject(this)
     }
-
 }
