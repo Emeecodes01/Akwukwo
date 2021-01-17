@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id ("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -36,7 +39,7 @@ android {
 
     dynamicFeatures = mutableSetOf(":player")
 
-    tasks.withType <org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    tasks.withType <KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 }

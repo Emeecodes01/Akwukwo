@@ -1,5 +1,6 @@
 package com.mobigods.core.base
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +12,17 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import cc.cloudist.acplibrary.ACProgressConstant
+import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.snackbar.Snackbar
+
 
 abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
     lateinit var binding: T
 
     abstract val layoutRes: Int
     abstract fun observeViewModel()
+    private lateinit var dialog: ACProgressFlower
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +37,12 @@ abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
+
+        dialog = ACProgressFlower.Builder(requireContext())
+            .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+            .themeColor(Color.WHITE)
+            .text("Title is here")
+            .fadeColor(Color.DKGRAY).build()
     }
 
     fun navigateTo(navDirections: NavDirections) {
@@ -51,6 +62,14 @@ abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
 
     fun showToastMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showLoading() {
+        dialog.show()
+    }
+
+    fun hideLoading() {
+        dialog.dismiss()
     }
 
 

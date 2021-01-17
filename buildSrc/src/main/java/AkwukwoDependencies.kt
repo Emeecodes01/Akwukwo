@@ -74,17 +74,11 @@ object AkwukwoDependencies {
         object Versions {
             const val materialDesignComps = "1.2.1"
             const val constraintLayout = "2.0.4"
-            const val progressButton = "3.0.3"
-            const val loadingView = "1.4.0"
-            const val pagerIndicator = "1.0.6"
-            const val aviLoadingVersion = "2.1.3"
+            const val rvAnimator = "4.0.1"
         }
         const val materialDesign = "com.google.android.material:material:${Versions.materialDesignComps}"
         const val constraintLayoutDep = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-        const val progressButtonLib = "com.mikhaellopez:circularprogressbar:${Versions.progressButton}"
-        const val loadingView = "com.github.ybq:Android-SpinKit:${Versions.loadingView}"
-        const val pagerIndicator = "com.github.adrielcafe:PageIndicatorView:${Versions.pagerIndicator}"
-        const val aviLoading = "com.wang.avi:library:${Versions.aviLoadingVersion}"
+        const val recyclerViewAnimator = "jp.wasabeef:recyclerview-animators:${Versions.rvAnimator}"
     }
 
     object Persistence {
@@ -148,6 +142,16 @@ object AkwukwoDependencies {
     }
 
 
+    object ExoPlayer {
+        object Version {
+            const val exoPlayerVersion = "2.12.3"
+        }
+        const val exoCore = "com.google.android.exoplayer:exoplayer-core:${Version.exoPlayerVersion}"
+        const val exoUI = "com.google.android.exoplayer:exoplayer-ui:${Version.exoPlayerVersion}"
+        const val exoStreaming = "com.google.android.exoplayer:exoplayer-smoothstreaming:${Version.exoPlayerVersion}"
+    }
+
+
     object Api {
         object Version {
             const val retrofit = "2.9.0"
@@ -178,6 +182,7 @@ fun DependencyHandler.domain() {
 fun DependencyHandler.core() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("api", AkwukwoDependencies.UILibs.materialDesign)
+    add("implementation", "cc.cloudist.acplibrary:library:1.2.1")
     add("api", project(":domain"))
     androidX()
     dagger()
@@ -219,6 +224,7 @@ fun DependencyHandler.mobileUI() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("implementation", AkwukwoDependencies.UILibs.materialDesign)
     add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
+    add("implementation", AkwukwoDependencies.UILibs.recyclerViewAnimator)
     add("implementation", project(":core"))
     add("implementation", project(":presentation"))
     add("implementation", project(":remote"))
@@ -236,6 +242,8 @@ fun DependencyHandler.player() {
     add("implementation", AkwukwoDependencies.AndroidX.kotlinStdlib)
     add("implementation", AkwukwoDependencies.UILibs.materialDesign)
     add("implementation", AkwukwoDependencies.UILibs.constraintLayoutDep)
+    add("implementation", project(":core"))
+    exoplayer()
     unitTestDeps()
     androidUITestDeps()
     androidX()
@@ -310,4 +318,10 @@ fun DependencyHandler.unitTestDeps() {
     add("testImplementation", TestDependencies.junit)
     add("testImplementation", TestDependencies.coroutineTest)
     add("testImplementation", TestDependencies.truth)
+}
+
+fun DependencyHandler.exoplayer() {
+    add("implementation", AkwukwoDependencies.ExoPlayer.exoCore)
+    add("implementation", AkwukwoDependencies.ExoPlayer.exoUI)
+    add("implementation", AkwukwoDependencies.ExoPlayer.exoStreaming)
 }

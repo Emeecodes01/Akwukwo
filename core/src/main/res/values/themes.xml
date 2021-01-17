@@ -35,20 +35,17 @@
 
         <!--Platform attributes-->
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
-<!--        <item name="android:statusBarColor">?attr/colorSurface</item>-->
-<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-<!--        <item name="android:background">@color/iron</item>-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
 
 
     </style>
 
-
     <!--Extend this whenever you want to create a new theme to use-->
     <style name="Akwukwo" parent="Base.Akwukwo"/>
-
 
     <style name="Akwukwo.Main" parent="Akwukwo">
         <!--Main App colors-->
@@ -57,6 +54,12 @@
         <item name="colorSecondary">@color/akwukwo_white</item>
         <item name="colorSecondaryVariant">@color/akwukwo_white</item>
 
+    </style>
+
+
+    <style name="Akwukwo.Main.TranslucentStatus">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>

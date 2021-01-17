@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.mobigods.akwkw.ui.subject.DashboardFragment"
+        android:label="SubjectFragment"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_chapterFragment"
+            app:destination="@id/chapterFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="com.mobigods.akwkw.ui.chapter.ChapterFragment"
+        android:label="ChapterFragment"
+        tools:layout="@layout/fragment_chapters">
+        <action
+            android:id="@+id/action_chapterFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <argument
+            android:name="subject"
+            app:argType="com.mobigods.presentation.models.SubjectModel" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.mobigods.player.ui.PlayerFragment"
+        app:moduleName="Akwukwo.player"
+        android:label="PlayerFragment"
+        tools:layout="@layout/fragment_player">
+        <argument
+            android:name="media_url"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

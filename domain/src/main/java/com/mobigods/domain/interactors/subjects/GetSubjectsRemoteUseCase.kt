@@ -9,14 +9,12 @@ import javax.inject.Inject
 
 class GetSubjectsRemoteUseCase @Inject constructor(
     private val executionThread: ExecutionThread,
-    private val remoteRepository: AkwukwoSubjectsRemoteRepository,
-    private val localRepository: AkwukwoSubjectsLocalRepository
+    private val remoteRepository: AkwukwoSubjectsRemoteRepository
 ): SuspendUseCase<Unit, Unit>(executionThread) {
 
 
     override suspend fun execute(params: Unit?) {
-        val subjects = remoteRepository.fetchSubjects()
-        localRepository.saveSubjects(subjects)
+        remoteRepository.fetchSubjects()
     }
 
 }

@@ -8,6 +8,6 @@ object ErrorExtractor {
         when (err) {
             is HttpException -> ""
             //todo add other error here
-            else -> "An error has occurred"
+            else -> err.message ?: "An error has occurred"
         }
 }

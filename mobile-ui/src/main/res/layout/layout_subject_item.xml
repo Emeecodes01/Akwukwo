@@ -5,16 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="SubjectName"
-            type="String" />
+            name="subject"
+            type="com.mobigods.presentation.models.SubjectModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/subject_card"
         android:layout_height="80dp"
         android:layout_width="match_parent"
         app:cardCornerRadius="15dp"
         android:layout_margin="2dp"
+        app:subjectName="@{subject.name}"
         app:cardBackgroundColor="@color/burnt_sienna">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="@{subject.name}"
                 tools:text="Mathematics"
                 android:elevation="2dp"
                 android:textColor="@color/white"
@@ -38,6 +42,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                app:subjectName="@{subject.name}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -51,11 +56,13 @@
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:scaleType="fitXY"
+                app:subject="@{subject.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/mathematics_backdrop" />
+                app:srcCompat="@drawable/biology_backdrop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
