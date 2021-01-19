@@ -5,13 +5,13 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class LessonModel(
-    val chapter_id: Int,
-    val icon: String,
-    val id: Int,
-    val media_url: String,
-    val name: String,
-    val subject_id: Int
+data class LessonModel (
+    val chapter_id: Int = 0,
+    val icon: String = "",
+    val id: Int = 0,
+    val media_url: String = "",
+    val name: String = "",
+    val subject_id: Int = 0
 ) : Parcelable {
 
     override fun equals(other: Any?): Boolean {

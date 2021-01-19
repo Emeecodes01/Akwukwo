@@ -40,11 +40,8 @@
         android:label="PlayerFragment"
         tools:layout="@layout/fragment_player">
         <argument
-            android:name="lesson"
-            app:argType="com.mobigods.presentation.models.LessonModel" />
-        <argument
-            android:name="chapterName"
-            app:argType="string" />
+            android:name="playerData"
+            app:argType="com.mobigods.presentation.models.PlayerData" />
     </fragment>
 
 </navigation>

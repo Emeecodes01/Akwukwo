@@ -2,7 +2,11 @@ package com.mobigods.player.ui
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.ControlDispatcher
 import com.google.android.exoplayer2.DefaultControlDispatcher
@@ -15,8 +19,20 @@ import com.mobigods.player.di.inject
 import com.mobigods.player.utils.Constants
 import com.mobigods.player.utils.exoplayer
 import com.mobigods.player.utils.mediaitem
+import com.mobigods.presentation.models.LessonModel
+import com.mobigods.presentation.models.RecentLessonModel
+import com.mobigods.presentation.viewmodels.player.PlayerViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
+import javax.inject.Inject
 
 class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val playerViewModel: PlayerViewModel by viewModels { viewModelFactory }
 
     private lateinit var exoPlayer: SimpleExoPlayer
     private val playerFragmentArgs: PlayerFragmentArgs by navArgs()
@@ -27,15 +43,27 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lessonName.text = playerFragmentArgs.lesson.name
+
+        playerFragmentArgs.playerData.lessonName.let {
+            binding.lessonName.text = it
+        }
+
         setUpExoPlayer()
 
         binding.materialToolbar2.setNavigationOnClickListener {
-            goBack()
+            savePlayedLesson()
         }
 
-        binding.details.text = playerFragmentArgs.chapterName
+        binding.details.text = playerFragmentArgs.playerData.chapterName
 
+        setBackPressedListener {
+            savePlayedLesson()
+        }
+    }
+
+
+    private fun savePlayedLesson() {
+        playerViewModel.saveRecentLesson(exoPlayer.currentPosition, playerFragmentArgs.playerData)
     }
 
 
@@ -46,7 +74,11 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
     }
 
     override fun observeViewModel() {
-
+        with(playerViewModel) {
+            lessons.observe(viewLifecycleOwner) { saved ->
+                if (saved) goBack()
+            }
+        }
     }
 
 
@@ -61,11 +93,16 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
         exoPlayer = exoplayer {}
 
         val mediaItem = mediaitem {
-            setUri(Uri.parse(playerFragmentArgs.lesson.media_url))
+            val mediaUrl = playerFragmentArgs.playerData.mediaUrl
+            setUri(Uri.parse(mediaUrl))
         }
 
         exoPlayer.setMediaItem(mediaItem)
         binding.playerView.player = exoPlayer
+
+        playerFragmentArgs.playerData.watchedDuration.let {
+            exoPlayer.seekTo(it)
+        }
 
         exoPlayer.prepare()
         exoPlayer.play()

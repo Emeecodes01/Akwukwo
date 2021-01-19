@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.google.android.material.snackbar.Snackbar
+import com.mobigods.core.R
 
 
 abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
@@ -41,7 +42,7 @@ abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
         dialog = ACProgressFlower.Builder(requireContext())
             .direction(ACProgressConstant.DIRECT_CLOCKWISE)
             .themeColor(Color.WHITE)
-            .text("Title is here")
+            .text(getString(R.string.loading))
             .fadeColor(Color.DKGRAY).build()
     }
 

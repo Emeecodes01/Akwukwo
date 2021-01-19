@@ -20,7 +20,7 @@ class LessonCacheModelMapper @Inject constructor(): BaseMapper<LessonCacheModel,
     }
 
     override fun mapFrom(from: LessonCacheModel): Lesson {
-        return Lesson(
+        return Lesson (
             chapter_id = from.chapter_id,
             icon = from.icon,
             media_url = from.media_url,

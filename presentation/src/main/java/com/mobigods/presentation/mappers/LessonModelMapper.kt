@@ -18,7 +18,14 @@ class LessonModelMapper @Inject constructor(): BaseMapper<LessonModel, Lesson> {
     }
 
     override fun mapFrom(from: LessonModel): Lesson {
-        TODO("Not yet implemented")
+        return Lesson(
+            id = from.id,
+            chapter_id = from.chapter_id,
+            icon = from.icon,
+            media_url = from.media_url,
+            name = from.name,
+            subject_id = from.subject_id
+        )
     }
 
 

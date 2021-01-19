@@ -9,11 +9,11 @@ abstract class SuspendUseCase<in PARAMS, out RESULT>(
 
     suspend operator fun invoke(params: PARAMS? = null): RESULT {
         return withContext(executionThread.io()) {
-            execute(params)
+              execute(params)
         }
     }
 
 
     @Throws(RuntimeException::class)
-    protected abstract suspend fun execute(params: PARAMS?): RESULT
+    abstract suspend fun execute(params: PARAMS?): RESULT
 }
