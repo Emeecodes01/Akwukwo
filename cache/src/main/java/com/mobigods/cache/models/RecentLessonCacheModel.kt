@@ -9,7 +9,6 @@ import com.mobigods.domain.models.Lesson
 data class RecentLessonCacheModel (
     @PrimaryKey
     val id: String,
-    val chapterName: String,
     val watchedDuration: Long,
     @Embedded
     val lesson: LessonCacheModel,

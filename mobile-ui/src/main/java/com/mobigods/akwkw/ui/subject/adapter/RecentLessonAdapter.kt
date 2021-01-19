@@ -14,18 +14,19 @@ import com.mobigods.core.utils.extensions.checkAndUpdateItems
 import com.mobigods.core.utils.extensions.click
 import com.mobigods.domain.models.RecentLesson
 import com.mobigods.presentation.models.RecentLessonModel
+import com.mobigods.presentation.models.RecentLessonWithSubjectModel
 import com.mobigods.presentation.models.SubjectModel
 import kotlin.properties.Delegates
 
-class RecentLessonAdapter(private val subjectName: (Int) -> String?,
-                          private val onClicked: (RecentLessonModel) -> Unit): RecyclerView.Adapter<RecentLessonAdapter.RecentLessonViewHolder>(){
+class RecentLessonAdapter(
+    private val onClicked: (RecentLessonWithSubjectModel) -> Unit): RecyclerView.Adapter<RecentLessonAdapter.RecentLessonViewHolder>(){
 
     private lateinit var binding: LayoutRecentItemBinding
     private lateinit var context: Context
 
-    var recents: List<RecentLessonModel> by Delegates.observable(emptyList()) { _, oldList, newList ->
+    var recents: List<RecentLessonWithSubjectModel> by Delegates.observable(emptyList()) { _, oldList, newList ->
         checkAndUpdateItems(oldList, newList) { old, new ->
-            old.id == new.id
+            old.recentLessonModel.id == new.recentLessonModel.id
         }
     }
 
@@ -51,8 +52,8 @@ class RecentLessonAdapter(private val subjectName: (Int) -> String?,
 
         fun bindView(position: Int) {
             val recentLesson = recents[position]
-            val subName = subjectName(recentLesson.lesson.subject_id) ?: ""
-            binding.recentLesson = recentLesson
+            val subName = recentLesson.subjectModel.name
+            binding.recentLesson = recentLesson.recentLessonModel
             binding.subjectName.text = subName
             val subjectColorRes = Tools.getCardColorFromName(subName)
             val colorInt = ContextCompat.getColor(context, subjectColorRes)

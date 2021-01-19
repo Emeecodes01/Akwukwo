@@ -7,7 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class RecentLessonModel (
     val id: String,
-    val chapterName: String,
     val watchedDuration: Long,
     val lesson: LessonModel,
 ): Parcelable

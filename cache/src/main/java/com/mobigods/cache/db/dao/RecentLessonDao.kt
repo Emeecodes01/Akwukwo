@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mobigods.cache.models.RecentLessonCacheModel
+import com.mobigods.cache.models.RecentLessonWithSubjectCacheModel
 import kotlinx.coroutines.flow.Flow
 
 
@@ -12,11 +13,11 @@ import kotlinx.coroutines.flow.Flow
 abstract class RecentLessonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun saveRecentLesson(recentLessonCacheModel: RecentLessonCacheModel): Long
-
-    //@Query("SELECT * FROM recent_lessons, subjects")
+    abstract suspend fun saveRecentLesson(recentLessonCacheModel: RecentLessonCacheModel): Long
 
     @Query("SELECT * FROM recent_lessons")
     abstract fun getRecentLessons(): Flow<List<RecentLessonCacheModel>>
 
+    @Query("SELECT * FROM recent_lessons")
+    abstract fun getRecentLessonsWithSubject(): Flow<List<RecentLessonWithSubjectCacheModel>>
 }

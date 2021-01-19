@@ -5,13 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobigods.core.utils.states.AkwukwoResource
+import com.mobigods.domain.interactors.recent.GetRecentLessonWithSubjectUseCase
 import com.mobigods.domain.interactors.recent.GetRecentLessonsUseCase
 import com.mobigods.domain.interactors.subjects.GetSubjectsLocalUseCase
 import com.mobigods.domain.interactors.subjects.GetSubjectsRemoteUseCase
 import com.mobigods.domain.interactors.subjects.LastFetchedUseCase
 import com.mobigods.presentation.mappers.RecentLessonModelMapper
+import com.mobigods.presentation.mappers.RecentLessonWithSubjectModelMapper
 import com.mobigods.presentation.mappers.SubjectModelMapper
 import com.mobigods.presentation.models.RecentLessonModel
+import com.mobigods.presentation.models.RecentLessonWithSubjectModel
 import com.mobigods.presentation.models.SubjectModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +28,8 @@ class DashBoardViewModel @Inject constructor(
     private val getSubjectsLocalUseCase: GetSubjectsLocalUseCase,
     private val lastFetchedUseCase: LastFetchedUseCase,
     private val getRecentLessonsUseCase: GetRecentLessonsUseCase,
+    private val getRecentLessonWithSubjectUseCase: GetRecentLessonWithSubjectUseCase,
+    private val recentLessonWithSubjectModelMapper: RecentLessonWithSubjectModelMapper,
     private val recentLessonModelMapper: RecentLessonModelMapper,
     private val subjectModelMapper: SubjectModelMapper
 ): ViewModel() {
@@ -35,8 +40,8 @@ class DashBoardViewModel @Inject constructor(
     private val _subjects: MutableLiveData<AkwukwoResource<List<SubjectModel>>> = MutableLiveData()
     val subject: LiveData<AkwukwoResource<List<SubjectModel>>> = _subjects
 
-    private val _recentLesson: MutableLiveData<AkwukwoResource<List<RecentLessonModel>>> = MutableLiveData()
-    val recent: LiveData<AkwukwoResource<List<RecentLessonModel>>> = _recentLesson
+    private val _recentLesson: MutableLiveData<AkwukwoResource<List<RecentLessonWithSubjectModel>>> = MutableLiveData()
+    val recent: LiveData<AkwukwoResource<List<RecentLessonWithSubjectModel>>> = _recentLesson
 
     private val subjectExecptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
@@ -83,9 +88,8 @@ class DashBoardViewModel @Inject constructor(
 
     fun getRecentLessons() {
         viewModelScope.launch(recentExecptionHandler) {
-            getRecentLessonsUseCase.execute().collect {
-                _recentLesson.value =
-                    AkwukwoResource.Success(it.map { recentLesson ->  recentLessonModelMapper.mapTo(recentLesson) })
+            getRecentLessonWithSubjectUseCase.execute().collect {
+                _recentLesson.value = AkwukwoResource.Success(it.map { recent -> recentLessonWithSubjectModelMapper.mapTo(recent) })
             }
         }
     }

@@ -2,6 +2,8 @@ package com.mobigods.akwkw.ui.chapter
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,9 @@ import com.mobigods.core.utils.image.ImageLoader
 import com.mobigods.core.utils.layoutmanagers.AnimatedHorizontalLinearLayoutManager
 import com.mobigods.core.utils.layoutmanagers.AnimatedLinearLayoutManager
 import com.mobigods.presentation.models.LessonModel
+import com.mobigods.presentation.models.PlayerData
+import com.mobigods.presentation.viewmodels.AkwukwoViewModelFactory
+import com.mobigods.presentation.viewmodels.chapter.ChapterViewModel
 import dagger.android.support.AndroidSupportInjection
 import jp.wasabeef.recyclerview.animators.LandingAnimator
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
@@ -24,6 +29,11 @@ class ChapterFragment: BaseFragment<FragmentChaptersBinding>(), ChapterAdapter.C
 
     @Inject
     lateinit var chaptersAdapter: ChapterAdapter
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val chapterViewModel: ChapterViewModel by viewModels { viewModelFactory }
 
     private val fragmentArgs: ChapterFragmentArgs by navArgs()
 
@@ -68,8 +78,10 @@ class ChapterFragment: BaseFragment<FragmentChaptersBinding>(), ChapterAdapter.C
     }
 
     override fun onLessonClicked(lessonModel: LessonModel, chapterName: String) {
+        chapterViewModel.saveLesson(lessonModel)
+        val playerData = PlayerData.createFromLesson(lessonModel, chapterName)
         val lessonPlayerDirection = ChapterFragmentDirections
-            .actionChapterFragmentToPlayerFragment(lessonModel, chapterName, null)
+            .actionChapterFragmentToPlayerFragment(playerData)
         navigateTo(lessonPlayerDirection)
     }
 

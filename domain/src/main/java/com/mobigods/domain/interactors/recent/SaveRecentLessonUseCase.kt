@@ -16,7 +16,7 @@ class SaveRecentLessonUseCase @Inject constructor (
     override suspend fun execute(params: Parameter?) {
         checkNotNull(params)
         val recentLesson = RecentLesson(
-            id = params.id, chapterName = params.chapterName, watchedDuration = params.watchedDuration,
+            id = params.id, watchedDuration = params.watchedDuration,
             lesson = Lesson(
                 chapter_id = params.chapter_id, icon = params.icon, id = params.lesson_id,
                 media_url = params.media_url, name = params.name, subject_id = params.subject_id)
@@ -27,7 +27,6 @@ class SaveRecentLessonUseCase @Inject constructor (
 
     data class Parameter (
         val id: String,
-        val chapterName: String,
         val watchedDuration: Long,
         val chapter_id: Int,
         val icon: String,

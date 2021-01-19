@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mobigods.core.di.keys.ViewModelKey
 import com.mobigods.presentation.viewmodels.AkwukwoViewModelFactory
+import com.mobigods.presentation.viewmodels.chapter.ChapterViewModel
 import com.mobigods.presentation.viewmodels.dashboard.DashBoardViewModel
 import com.mobigods.presentation.viewmodels.player.PlayerViewModel
 import dagger.Binds
@@ -33,5 +34,12 @@ abstract class ViewModelModule {
     @ViewModelKey(PlayerViewModel::class)
     abstract fun bindPlayerViewModel(
         viewModel: PlayerViewModel
+    ): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChapterViewModel::class)
+    abstract fun bindChapterViewModel(
+        viewModel: ChapterViewModel
     ): ViewModel
 }

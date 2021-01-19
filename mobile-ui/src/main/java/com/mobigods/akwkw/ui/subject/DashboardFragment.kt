@@ -18,6 +18,8 @@ import com.mobigods.akwkw.ui.subject.decorations.VerticalListDecoration
 import com.mobigods.core.base.BaseFragment
 import com.mobigods.core.utils.states.AkwukwoState
 import com.mobigods.presentation.models.LessonModel
+import com.mobigods.presentation.models.PlayerData
+import com.mobigods.presentation.models.RecentLessonWithSubjectModel
 import com.mobigods.presentation.models.SubjectModel
 import com.mobigods.presentation.viewmodels.AkwukwoViewModelFactory
 import com.mobigods.presentation.viewmodels.dashboard.DashBoardViewModel
@@ -37,12 +39,17 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
     private val subjectAdapter: SubjectAdapter by lazy { SubjectAdapter{ subjectItemClicked(it) } }
 
 
-    private val recentAdapter: RecentLessonAdapter by lazy { RecentLessonAdapter (subjectName =
-    { id: Int -> dashBoardViewModel.subject.value?.data?.find { it.id ==  id}?.name}) {
-        val lessonPlayerDirection = DashboardFragmentDirections
-            .actionDashboardFragmentToPlayerFragment(null, it.chapterName, it)
-        navigateTo(lessonPlayerDirection)
+    private val recentAdapter: RecentLessonAdapter by lazy { RecentLessonAdapter {
+        navigateToPlayer(it)
     } }
+
+
+    private fun navigateToPlayer(recentLessonWithSubjectModel: RecentLessonWithSubjectModel) {
+        val playerData = PlayerData.createFromRecentLesson(recentLessonWithSubjectModel)
+        val lessonPlayerDirection = DashboardFragmentDirections.actionDashboardFragmentToPlayerFragment(playerData)
+
+        navigateTo(lessonPlayerDirection)
+    }
 
 
     override val layoutRes: Int

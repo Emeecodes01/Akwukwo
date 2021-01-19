@@ -12,7 +12,6 @@ class RecentLessonModelMapper @Inject constructor (
     override fun mapTo(to: RecentLesson): RecentLessonModel {
         return RecentLessonModel(
             id = to.id,
-            chapterName = to.chapterName,
             watchedDuration = to.watchedDuration,
             lesson = lessonModelMapper.mapTo(to.lesson)
         )
@@ -21,7 +20,6 @@ class RecentLessonModelMapper @Inject constructor (
     override fun mapFrom(from: RecentLessonModel): RecentLesson {
         return RecentLesson(
             id = from.id,
-            chapterName = from.chapterName,
             watchedDuration = from.watchedDuration,
             lesson = lessonModelMapper.mapFrom(from.lesson)
         )
