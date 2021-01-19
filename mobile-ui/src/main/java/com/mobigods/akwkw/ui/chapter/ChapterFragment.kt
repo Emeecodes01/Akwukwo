@@ -68,7 +68,8 @@ class ChapterFragment: BaseFragment<FragmentChaptersBinding>(), ChapterAdapter.C
     }
 
     override fun onLessonClicked(lessonModel: LessonModel, chapterName: String) {
-        val lessonPlayerDirection = ChapterFragmentDirections.actionChapterFragmentToPlayerFragment(lessonModel, chapterName)
+        val lessonPlayerDirection = ChapterFragmentDirections
+            .actionChapterFragmentToPlayerFragment(lessonModel, chapterName, null)
         navigateTo(lessonPlayerDirection)
     }
 

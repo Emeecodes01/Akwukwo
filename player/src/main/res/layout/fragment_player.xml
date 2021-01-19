@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:resize_mode="fixed_height"
+            app:resize_mode="fixed_width"
             app:show_buffering="when_playing" />
 
         <androidx.constraintlayout.widget.Guideline

@@ -1,7 +1,9 @@
 package com.mobigods.cache.module
 
 import com.mobigods.cache.db.AkwukwoDatabase
+import com.mobigods.cache.db.dao.RecentLessonDao
 import com.mobigods.cache.db.dao.SubjectDao
+import com.mobigods.cache.models.RecentLessonCacheModel
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,4 +17,8 @@ class LocalDaoModule {
     = database.subjectDao()
 
 
+    @Provides
+    @Singleton
+    fun provideRecentLessonDao(database: AkwukwoDatabase): RecentLessonDao
+            = database.recentLessonDao()
 }

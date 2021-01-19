@@ -6,18 +6,25 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobigods.akwkw.R
 import com.mobigods.akwkw.databinding.FragmentDashboardBinding
+import com.mobigods.akwkw.ui.chapter.ChapterFragmentDirections
+import com.mobigods.akwkw.ui.chapter.ChapterFragmentDirections.actionChapterFragmentToPlayerFragment
+import com.mobigods.akwkw.ui.subject.adapter.RecentLessonAdapter
 import com.mobigods.akwkw.ui.subject.adapter.SubjectAdapter
 import com.mobigods.akwkw.ui.subject.decorations.SubjectsItemDecoration
+import com.mobigods.akwkw.ui.subject.decorations.VerticalListDecoration
 import com.mobigods.core.base.BaseFragment
 import com.mobigods.core.utils.states.AkwukwoState
+import com.mobigods.presentation.models.LessonModel
 import com.mobigods.presentation.models.SubjectModel
 import com.mobigods.presentation.viewmodels.AkwukwoViewModelFactory
 import com.mobigods.presentation.viewmodels.dashboard.DashBoardViewModel
 import dagger.android.support.AndroidSupportInjection
 import jp.wasabeef.recyclerview.animators.LandingAnimator
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -28,6 +35,14 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
 
     private val dashBoardViewModel: DashBoardViewModel by viewModels { viewModelFactory }
     private val subjectAdapter: SubjectAdapter by lazy { SubjectAdapter{ subjectItemClicked(it) } }
+
+
+    private val recentAdapter: RecentLessonAdapter by lazy { RecentLessonAdapter (subjectName =
+    { id: Int -> dashBoardViewModel.subject.value?.data?.find { it.id ==  id}?.name}) {
+        val lessonPlayerDirection = DashboardFragmentDirections
+            .actionDashboardFragmentToPlayerFragment(null, it.chapterName, it)
+        navigateTo(lessonPlayerDirection)
+    } }
 
 
     override val layoutRes: Int
@@ -55,6 +70,18 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
             addItemDecoration(SubjectsItemDecoration(resources.getDimension(R.dimen.rv_item_spacing).toInt()))
             adapter = subjectAdapter
         }
+
+        binding.recentRv.apply {
+            itemAnimator = SlideInRightAnimator().apply {
+                addDuration = 300
+                removeDuration = 300
+                moveDuration = 300
+                changeDuration = 300
+            }
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(VerticalListDecoration(resources.getDimension(R.dimen.rv_item_spacing).toInt()))
+            adapter = recentAdapter
+        }
     }
 
 
@@ -71,8 +98,8 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
                 when(resource.state) {
                     AkwukwoState.SUCCESS -> {
                         resource.data?.let {
-                            if (it.isEmpty()) binding.showRecent = false
                             subjectAdapter.subjects = it
+                            dashBoardViewModel.getRecentLessons()
                         }
                     }
                     else -> {}
@@ -95,6 +122,27 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
                         resource.message?.let { showSnackMessage(it) }
                     }
                 }
+            }
+
+            recent.observe(viewLifecycleOwner) { resource ->
+
+                when(resource.state) {
+                    AkwukwoState.SUCCESS -> {
+                        resource.data?.let {
+                            if (it.isEmpty()) {
+                                binding.showRecent = false
+                                return@let
+                            }
+                            binding.showRecent = true
+                            recentAdapter.recents = it
+                        }
+
+                    }
+                    else -> {
+
+                    }
+                }
+
             }
 
         }

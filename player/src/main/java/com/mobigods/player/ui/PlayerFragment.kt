@@ -3,6 +3,8 @@ package com.mobigods.player.ui
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.ControlDispatcher
 import com.google.android.exoplayer2.DefaultControlDispatcher
@@ -15,8 +17,18 @@ import com.mobigods.player.di.inject
 import com.mobigods.player.utils.Constants
 import com.mobigods.player.utils.exoplayer
 import com.mobigods.player.utils.mediaitem
+import com.mobigods.presentation.models.LessonModel
+import com.mobigods.presentation.models.RecentLessonModel
+import com.mobigods.presentation.viewmodels.player.PlayerViewModel
+import java.util.*
+import javax.inject.Inject
 
 class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val playerViewModel: PlayerViewModel by viewModels { viewModelFactory }
 
     private lateinit var exoPlayer: SimpleExoPlayer
     private val playerFragmentArgs: PlayerFragmentArgs by navArgs()
@@ -27,15 +39,72 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lessonName.text = playerFragmentArgs.lesson.name
+
+        playerFragmentArgs.lesson?.let {
+            binding.lessonName.text = it.name
+        }
+
         setUpExoPlayer()
 
         binding.materialToolbar2.setNavigationOnClickListener {
+            savePlayedLesson()
             goBack()
         }
 
         binding.details.text = playerFragmentArgs.chapterName
 
+        setBackPressedListener {
+            savePlayedLesson()
+        }
+    }
+
+
+    private fun savePlayedLesson() {
+        val playedLesson = RecentLessonModel(
+            id = if (playerFragmentArgs.recentLesson == null) generateRandomId() else playerFragmentArgs.recentLesson!!.id,
+            chapterName = playerFragmentArgs.chapterName,
+            watchedDuration = exoPlayer.currentPosition,
+            lesson = createLesson()
+        )
+        playerViewModel.saveRecentLesson(playedLesson)
+    }
+
+
+    private fun createLesson(): LessonModel {
+        val recentLesson = playerFragmentArgs.recentLesson?.lesson
+        val lesson = playerFragmentArgs.lesson
+        return when {
+            recentLesson != null -> {
+                LessonModel(
+                    chapter_id = recentLesson.chapter_id,
+                    icon = recentLesson.icon,
+                    id = recentLesson.id,
+                    media_url = recentLesson.media_url,
+                    name = recentLesson.name,
+                    subject_id = recentLesson.subject_id
+                )
+            }
+
+            lesson != null -> {
+                LessonModel(
+                    chapter_id = lesson.chapter_id,
+                    icon = lesson.icon,
+                    id = lesson.id,
+                    media_url = lesson.media_url,
+                    name = lesson.name,
+                    subject_id = lesson.subject_id
+                )
+            }
+            else -> {
+                //not possible
+                LessonModel(0, "", 0, "", "", 0)
+            }
+        }
+
+    }
+
+    private fun generateRandomId(): String {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
 
@@ -46,7 +115,9 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
     }
 
     override fun observeViewModel() {
+        with(playerViewModel) {
 
+        }
     }
 
 
@@ -61,11 +132,16 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
         exoPlayer = exoplayer {}
 
         val mediaItem = mediaitem {
-            setUri(Uri.parse(playerFragmentArgs.lesson.media_url))
+            val mediaUrl = playerFragmentArgs.lesson?.let { it.media_url } ?: playerFragmentArgs.recentLesson?.lesson?.media_url ?: ""
+            setUri(Uri.parse(mediaUrl))
         }
 
         exoPlayer.setMediaItem(mediaItem)
         binding.playerView.player = exoPlayer
+
+        playerFragmentArgs.recentLesson?.let {
+            exoPlayer.seekTo(it.watchedDuration)
+        }
 
         exoPlayer.prepare()
         exoPlayer.play()

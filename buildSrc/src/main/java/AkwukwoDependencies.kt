@@ -237,7 +237,7 @@ fun DependencyHandler.mobileUI() {
     add("implementation", AkwukwoDependencies.UILibs.recyclerViewAnimator)
     add("api", project(":core"))
     add("api", project(":presentation"))
-    add("implementation", project(":remote"))
+    add("api", project(":remote"))
     add("api", project(":cache"))
     archComponent()
     dagger()

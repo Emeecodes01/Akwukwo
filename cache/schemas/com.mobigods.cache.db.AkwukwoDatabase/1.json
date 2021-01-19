@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1b23c75d9a9103723fa0397a0fac9961",
+    "identityHash": "a300db4858b160cd152008128425b6eb",
     "entities": [
       {
         "tableName": "subjects",
@@ -41,12 +41,80 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "recent_lessons",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `chapterName` TEXT NOT NULL, `watchedDuration` INTEGER NOT NULL, `chapter_id` INTEGER NOT NULL, `icon` TEXT NOT NULL, `lesson_id` INTEGER NOT NULL, `media_url` TEXT NOT NULL, `name` TEXT NOT NULL, `subject_id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterName",
+            "columnName": "chapterName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "watchedDuration",
+            "columnName": "watchedDuration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.chapter_id",
+            "columnName": "chapter_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.icon",
+            "columnName": "icon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.id",
+            "columnName": "lesson_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.media_url",
+            "columnName": "media_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lesson.subject_id",
+            "columnName": "subject_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1b23c75d9a9103723fa0397a0fac9961')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a300db4858b160cd152008128425b6eb')"
     ]
   }
 }

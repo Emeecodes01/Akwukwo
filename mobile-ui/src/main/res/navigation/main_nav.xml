@@ -41,10 +41,15 @@
         tools:layout="@layout/fragment_player">
         <argument
             android:name="lesson"
-            app:argType="com.mobigods.presentation.models.LessonModel" />
+            app:argType="com.mobigods.presentation.models.LessonModel"
+            app:nullable="true"/>
         <argument
             android:name="chapterName"
             app:argType="string" />
+        <argument
+            android:name="recentLesson"
+            app:argType="com.mobigods.presentation.models.RecentLessonModel"
+            app:nullable="true" />
     </fragment>
 
 </navigation>
