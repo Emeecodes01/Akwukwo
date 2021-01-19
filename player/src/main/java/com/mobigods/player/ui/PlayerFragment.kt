@@ -52,7 +52,6 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
         binding.materialToolbar2.setNavigationOnClickListener {
             savePlayedLesson()
-            goBack()
         }
 
         binding.details.text = playerFragmentArgs.playerData.chapterName
@@ -64,7 +63,6 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
 
     private fun savePlayedLesson() {
-        Log.i(PlayerFragment::class.simpleName, "Called in save")
         playerViewModel.saveRecentLesson(exoPlayer.currentPosition, playerFragmentArgs.playerData)
     }
 
@@ -77,7 +75,9 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
     override fun observeViewModel() {
         with(playerViewModel) {
-
+            lessons.observe(viewLifecycleOwner) { saved ->
+                if (saved) goBack()
+            }
         }
     }
 

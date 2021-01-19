@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mobigods.core.utils.SingleLiveData
 import com.mobigods.core.utils.states.AkwukwoResource
 import com.mobigods.domain.interactors.recent.GetRecentLessonWithSubjectUseCase
 import com.mobigods.domain.interactors.recent.GetRecentLessonsUseCase
@@ -34,14 +35,15 @@ class DashBoardViewModel @Inject constructor(
     private val subjectModelMapper: SubjectModelMapper
 ): ViewModel() {
 
-    private val _subjectsRemote: MutableLiveData<AkwukwoResource<List<SubjectModel>>> = MutableLiveData()
+    private val _subjectsRemote: SingleLiveData<AkwukwoResource<List<SubjectModel>>> = SingleLiveData()
     val subjectRemote: LiveData<AkwukwoResource<List<SubjectModel>>> = _subjectsRemote
 
-    private val _subjects: MutableLiveData<AkwukwoResource<List<SubjectModel>>> = MutableLiveData()
+    private val _subjects: SingleLiveData<AkwukwoResource<List<SubjectModel>>> = SingleLiveData()
     val subject: LiveData<AkwukwoResource<List<SubjectModel>>> = _subjects
 
     private val _recentLesson: MutableLiveData<AkwukwoResource<List<RecentLessonWithSubjectModel>>> = MutableLiveData()
     val recent: LiveData<AkwukwoResource<List<RecentLessonWithSubjectModel>>> = _recentLesson
+
 
     private val subjectExecptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()

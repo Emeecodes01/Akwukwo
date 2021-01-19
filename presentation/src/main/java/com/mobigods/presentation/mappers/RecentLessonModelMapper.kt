@@ -13,7 +13,8 @@ class RecentLessonModelMapper @Inject constructor (
         return RecentLessonModel(
             id = to.id,
             watchedDuration = to.watchedDuration,
-            lesson = lessonModelMapper.mapTo(to.lesson)
+            lesson = lessonModelMapper.mapTo(to.lesson),
+            time = to.time,
         )
     }
 
@@ -21,6 +22,7 @@ class RecentLessonModelMapper @Inject constructor (
         return RecentLesson(
             id = from.id,
             watchedDuration = from.watchedDuration,
+            time = from.time,
             lesson = lessonModelMapper.mapFrom(from.lesson)
         )
     }

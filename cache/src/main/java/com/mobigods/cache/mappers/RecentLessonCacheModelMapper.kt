@@ -14,7 +14,8 @@ class RecentLessonCacheModelMapper @Inject constructor(
         return RecentLessonCacheModel(
             id = to.id,
             watchedDuration = to.watchedDuration,
-            lesson = lessonCacheModelMapper.mapTo(to.lesson)
+            lesson = lessonCacheModelMapper.mapTo(to.lesson),
+            time = to.time
         )
     }
 
@@ -22,7 +23,8 @@ class RecentLessonCacheModelMapper @Inject constructor(
         return RecentLesson(
             id = from.id,
             watchedDuration = from.watchedDuration,
-            lesson = lessonCacheModelMapper.mapFrom(from.lesson)
+            lesson = lessonCacheModelMapper.mapFrom(from.lesson),
+            time = from.time
         )
     }
 

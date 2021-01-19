@@ -17,6 +17,7 @@ class SaveRecentLessonUseCase @Inject constructor (
         checkNotNull(params)
         val recentLesson = RecentLesson(
             id = params.id, watchedDuration = params.watchedDuration,
+            time = params.time,
             lesson = Lesson(
                 chapter_id = params.chapter_id, icon = params.icon, id = params.lesson_id,
                 media_url = params.media_url, name = params.name, subject_id = params.subject_id)
@@ -26,8 +27,9 @@ class SaveRecentLessonUseCase @Inject constructor (
     }
 
     data class Parameter (
-        val id: String,
-        val watchedDuration: Long,
+        val id: String = "",
+        val watchedDuration: Long = 0,
+        val time: Long = 0,
         val chapter_id: Int,
         val icon: String,
         val lesson_id: Int,

@@ -9,4 +9,5 @@ data class RecentLessonModel (
     val id: String,
     val watchedDuration: Long,
     val lesson: LessonModel,
+    val time: Long
 ): Parcelable

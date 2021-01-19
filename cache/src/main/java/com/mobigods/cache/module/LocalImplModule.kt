@@ -1,6 +1,6 @@
 package com.mobigods.cache.module
 
-import com.mobigods.cache.impl.AkwukwoLessonLocalRepositoryImpl
+//import com.mobigods.cache.impl.AkwukwoLessonLocalRepositoryImpl
 import com.mobigods.cache.impl.AkwukwoRecentLessonsLocalRepositoryImpl
 import com.mobigods.cache.impl.AkwukwoSubjectsLocalRepositoryImpl
 import com.mobigods.cache.preference.AkwukwoPreferenceManager
@@ -35,9 +35,4 @@ abstract class LocalImplModule {
         impl: AkwukwoRecentLessonsLocalRepositoryImpl
     ): AkwukwoRecentLessonsLocalRepository
 
-    @Binds
-    @Singleton
-    abstract fun bindLessonImpl(
-        impl: AkwukwoLessonLocalRepositoryImpl
-    ): AkwukwoLessonLocalRepository
 }

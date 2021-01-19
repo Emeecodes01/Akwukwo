@@ -1,7 +1,7 @@
 package com.mobigods.cache.module
 
 import com.mobigods.cache.db.AkwukwoDatabase
-import com.mobigods.cache.db.dao.LessonDao
+//import com.mobigods.cache.db.dao.LessonDao
 import com.mobigods.cache.db.dao.RecentLessonDao
 import com.mobigods.cache.db.dao.SubjectDao
 import com.mobigods.cache.models.RecentLessonCacheModel
@@ -23,7 +23,7 @@ class LocalDaoModule {
     fun provideRecentLessonDao(database: AkwukwoDatabase): RecentLessonDao
             = database.recentLessonDao()
 
-    @Provides
-    @Singleton
-    fun provideLessonDao(database: AkwukwoDatabase): LessonDao = database.lessonDao()
+//    @Provides
+//    @Singleton
+//    fun provideLessonDao(database: AkwukwoDatabase): LessonDao = database.lessonDao()
 }

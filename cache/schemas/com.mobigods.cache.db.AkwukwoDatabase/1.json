@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f6612aafe562e1f2219399e9951d0d82",
+    "identityHash": "0f8ba9bbbe25d981ece37bb9fba535d6",
     "entities": [
       {
         "tableName": "subjects",
@@ -44,17 +44,23 @@
       },
       {
         "tableName": "recent_lessons",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `watchedDuration` INTEGER NOT NULL, `lesson_id` INTEGER NOT NULL, `chapter_id` INTEGER NOT NULL, `icon` TEXT NOT NULL, `media_url` TEXT NOT NULL, `name` TEXT NOT NULL, `subject_id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recent_id` TEXT NOT NULL, `watchedDuration` INTEGER NOT NULL, `current_time` INTEGER NOT NULL, `lesson_id` INTEGER NOT NULL, `chapter_id` INTEGER NOT NULL, `icon` TEXT NOT NULL, `media_url` TEXT NOT NULL, `name` TEXT NOT NULL, `subject_id` INTEGER NOT NULL, PRIMARY KEY(`recent_id`))",
         "fields": [
           {
             "fieldPath": "id",
-            "columnName": "id",
+            "columnName": "recent_id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "watchedDuration",
             "columnName": "watchedDuration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "current_time",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -97,57 +103,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "lessons",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`lesson_id` INTEGER NOT NULL, `chapter_id` INTEGER NOT NULL, `icon` TEXT NOT NULL, `media_url` TEXT NOT NULL, `name` TEXT NOT NULL, `subject_id` INTEGER NOT NULL, PRIMARY KEY(`lesson_id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "lesson_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "chapter_id",
-            "columnName": "chapter_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "icon",
-            "columnName": "icon",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "media_url",
-            "columnName": "media_url",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "subject_id",
-            "columnName": "subject_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "lesson_id"
+            "recent_id"
           ],
           "autoGenerate": false
         },
@@ -158,7 +114,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f6612aafe562e1f2219399e9951d0d82')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f8ba9bbbe25d981ece37bb9fba535d6')"
     ]
   }
 }
