@@ -218,6 +218,8 @@ fun DependencyHandler.cache() {
     add("implementation", project(":core"))
     room()
     dagger()
+    androidUITestDeps()
+    unitTestDeps()
 }
 
 fun DependencyHandler.presentation() {

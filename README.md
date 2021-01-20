@@ -87,4 +87,4 @@ Dependencies are managed across the multiple modules using **kotlin gradle dsl**
 
 ## Testing
 
-Each module of the app is tested using testing frameworks provided by [jetpack test package](https://developer.android.com/jetpack/androidx/releases/test#1.3.0), [Mockk](https://mockk.io/) for mocking [konveyor](https://github.com/Vacxe/Konveyor) to generate random objects
+Each module of the app is tested using testing frameworks provided by [jetpack test package](https://developer.android.com/jetpack/androidx/releases/test#1.3.0), [Mockk](https://mockk.io/) for mocking [konveyor](https://github.com/Vacxe/Konveyor) to generate random objects, [truth](https://truth.dev/) was used for assertions

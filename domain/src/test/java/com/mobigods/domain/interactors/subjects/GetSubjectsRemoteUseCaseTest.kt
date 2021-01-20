@@ -34,7 +34,7 @@ class GetSubjectsRemoteUseCaseTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        getSubjectsRemoteUseCase = GetSubjectsRemoteUseCase(executionThread, remoteRepository, localRepository)
+        getSubjectsRemoteUseCase = GetSubjectsRemoteUseCase(executionThread, remoteRepository)
     }
 
 
@@ -43,33 +43,12 @@ class GetSubjectsRemoteUseCaseTest {
         stubSubjects(DataGenerator.generateSubjects(2))
         getSubjectsRemoteUseCase.invoke()
 
-
         coVerify (exactly = 1) { remoteRepository.fetchSubjects() }
-        coVerify (exactly = 1) { localRepository.saveSubjects(any()) }
-    }
-
-
-    @Test
-    fun `verify that saveSubjects is called with the correct parameters`() = runBlockingTest {
-        val calling = DataGenerator.generateSubjects(2)
-
-        val slot = slot<List<Subject>>()
-        coEvery { remoteRepository.fetchSubjects() } returns calling
-        coEvery { localRepository.saveSubjects(capture(slot)) } returns listOf(1L)
-
-        getSubjectsRemoteUseCase.invoke()
-
-        val result = slot.captured
-
-        assertThat(result).isEqualTo(calling)
-
-        assertThat(result).hasSize(2)
     }
 
 
     private fun stubSubjects(subjects: List<Subject> = emptyList()) {
         coEvery { remoteRepository.fetchSubjects() } returns subjects
-        coEvery { localRepository.saveSubjects(any()) } returns emptyList()
     }
 
 
