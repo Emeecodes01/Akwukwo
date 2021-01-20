@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 abstract class SubjectDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun saveSubjects(subjects: List<SubjectCacheModel>): List<Long>
+    abstract suspend fun saveSubjects(subjects: List<SubjectCacheModel>): List<Long>
 
     @Query("SELECT * FROM subjects")
     abstract fun getAllSubjects(): Flow<List<SubjectCacheModel>>
