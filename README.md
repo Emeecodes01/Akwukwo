@@ -2,8 +2,8 @@
 
 **Akwukwo**(which means book in [igbo](https://en.wikipedia.org/wiki/Igbo_people) language) is an e-learning platform that allows student watch tutorials in video formats 
 
-<img src="screenData/app_ui.jpg" width="200"/>
-<img src="screenData/app_features1.gif" width="200"/>
+<img src="screenData/app_ui.jpg" width="200" align="center"/>
+<img src="screenData/app_features1.gif" width="200" align="center"/>
 
 ## Architecture
 
