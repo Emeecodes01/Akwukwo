@@ -74,7 +74,6 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
 
     private fun showAll() {
         recentAdapter.recents = emptyList()
-        recentAdapter.notifyDataSetChanged()
         dashBoardViewModel.recent.value?.data?.let {
             recentAdapter.recents = it
         }
