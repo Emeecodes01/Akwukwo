@@ -23,7 +23,4 @@ class LocalDaoModule {
     fun provideRecentLessonDao(database: AkwukwoDatabase): RecentLessonDao
             = database.recentLessonDao()
 
-//    @Provides
-//    @Singleton
-//    fun provideLessonDao(database: AkwukwoDatabase): LessonDao = database.lessonDao()
 }

@@ -73,6 +73,7 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
 
 
     private fun showAll() {
+        recentAdapter.recents = emptyList()
         dashBoardViewModel.recent.value?.data?.let {
             recentAdapter.recents = it
         }
@@ -95,8 +96,6 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
         binding.subjectsRv.apply {
             itemAnimator = SlideInDownAnimator().apply {
                 addDuration = 300
-                removeDuration = 300
-                moveDuration = 300
                 changeDuration = 300
             }
             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -106,10 +105,9 @@ class DashboardFragment: BaseFragment<FragmentDashboardBinding>() {
 
         binding.recentRv.apply {
             itemAnimator = SlideInRightAnimator().apply {
-                addDuration = 300
-                removeDuration = 300
-                moveDuration = 300
-                changeDuration = 300
+                addDuration = 250
+                moveDuration = 100
+                changeDuration = 100
             }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalListDecoration(resources.getDimension(R.dimen.rv_item_spacing).toInt()))

@@ -1,4 +1,4 @@
-package com.mobigods.domain.interactors.lessons
+package com.mobigods.domain.interactors.recent
 
 import com.mobigods.domain.interactors.base.SuspendUseCase
 import com.mobigods.domain.models.Lesson

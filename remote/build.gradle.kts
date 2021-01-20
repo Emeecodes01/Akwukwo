@@ -23,6 +23,7 @@ android {
     buildTypes {
         named("release") {
             isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://jackiechanbruteforce.ulesson.com/\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-logic.pro")
         }
 

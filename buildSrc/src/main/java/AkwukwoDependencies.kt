@@ -218,6 +218,8 @@ fun DependencyHandler.cache() {
     add("implementation", project(":core"))
     room()
     dagger()
+    androidUITestDeps()
+    unitTestDeps()
 }
 
 fun DependencyHandler.presentation() {
@@ -307,6 +309,9 @@ fun DependencyHandler.androidUITestDeps() {
     add("androidTestImplementation", TestDependencies.androidJunit)
     add("androidTestImplementation", TestDependencies.espresso)
     add("androidTestImplementation", TestDependencies.annotation)
+    add("androidTestImplementation", TestDependencies.konveyor)
+    add("androidTestImplementation", TestDependencies.truth)
+    add("androidTestImplementation", TestDependencies.coroutineTest)
 }
 
 fun DependencyHandler.archComponent() {

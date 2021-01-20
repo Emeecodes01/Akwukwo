@@ -3,8 +3,6 @@ package com.mobigods.presentation.viewmodels.chapter
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobigods.domain.interactors.lessons.GetLessonUseCase
-import com.mobigods.domain.interactors.lessons.SaveLessonUseCase
 import com.mobigods.domain.interactors.recent.SaveRecentLessonUseCase
 import com.mobigods.presentation.mappers.LessonModelMapper
 import com.mobigods.presentation.models.LessonModel

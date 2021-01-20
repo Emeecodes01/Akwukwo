@@ -1,22 +1,14 @@
 package com.mobigods.presentation.viewmodels.player
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobigods.domain.interactors.lessons.GetLessonUseCase
-import com.mobigods.domain.interactors.recent.GetRecentLessonsUseCase
-import com.mobigods.domain.interactors.recent.SaveRecentLessonUseCase
+import com.mobigods.domain.interactors.recent.GetLessonUseCase
 import com.mobigods.domain.interactors.recent.UpdateRecentLessonUseCase
-import com.mobigods.domain.interactors.subjects.GetSubjectsLocalUseCase
-import com.mobigods.presentation.mappers.RecentLessonModelMapper
 import com.mobigods.presentation.models.PlayerData
-import com.mobigods.presentation.models.RecentLessonModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
